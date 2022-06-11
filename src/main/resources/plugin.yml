@@ -1,0 +1,9 @@
+name: WeaponMaster
+description: Weapon plugin realized on demand for a client
+version: 1.0
+
+main: com.dandan2611.weaponmaster.WeaponMaster
+
+commands:
+  weapon:
+    permission: weapon.use

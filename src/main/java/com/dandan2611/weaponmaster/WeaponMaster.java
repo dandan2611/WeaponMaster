@@ -1,5 +1,7 @@
 package com.dandan2611.weaponmaster;
 
+import com.dandan2611.weaponmaster.commands.WeaponCommand;
+import org.bukkit.command.PluginCommand;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.logging.Logger;
@@ -20,7 +22,10 @@ public class WeaponMaster extends JavaPlugin {
     public void onEnable() {
         logger.info("Enabling plugin...");
 
-
+        // Weapon command executor
+        PluginCommand weaponCommand = getCommand("weapon");
+        if(weaponCommand != null)
+            weaponCommand.setExecutor(new WeaponCommand());
 
         logger.fine("Plugin enabled!");
     }
