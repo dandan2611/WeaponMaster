@@ -1,16 +1,14 @@
 package com.dandan2611.weaponmaster.weapon;
 
-import com.dandan2611.weaponmaster.weapon.impl.DebugStickWeapon;
-import com.dandan2611.weaponmaster.weapon.impl.FishLauncherWeapon;
-import com.dandan2611.weaponmaster.weapon.impl.LaserWeapon;
-import com.dandan2611.weaponmaster.weapon.impl.RailGunWeapon;
+import com.dandan2611.weaponmaster.weapon.impl.*;
 
 public enum Weapons {
 
     DEBUG_STICK(DebugStickWeapon.class),
     RAILGUN(RailGunWeapon.class),
     LASER(LaserWeapon.class),
-    FISH_LAUNCHER(FishLauncherWeapon.class);
+    FISH_LAUNCHER(FishLauncherWeapon.class),
+    INVOKER_STICK(InvokerStickWeapon.class);
 
     private Class<? extends Weapon> weaponClass;
 
