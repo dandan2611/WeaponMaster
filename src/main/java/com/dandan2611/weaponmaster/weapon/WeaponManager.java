@@ -1,6 +1,7 @@
 package com.dandan2611.weaponmaster.weapon;
 
 import com.dandan2611.weaponmaster.WeaponMaster;
+import org.bukkit.inventory.ItemStack;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -38,6 +39,14 @@ public class WeaponManager {
 
     public Weapon getWeapon(String weaponId) {
         return weaponMap.get(weaponId);
+    }
+
+    public Weapon getWeapon(ItemStack item) {
+        for (Weapon weapon : weaponMap.values()) {
+            if(weapon.isWeapon(item))
+                return weapon;
+        }
+        return null;
     }
 
 }
