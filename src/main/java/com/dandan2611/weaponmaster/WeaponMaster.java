@@ -53,5 +53,5 @@ public class WeaponMaster extends JavaPlugin {
     public WeaponManager getWeaponManager() {
         return weaponManager;
     }
-    
+
 }
