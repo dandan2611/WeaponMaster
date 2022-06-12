@@ -18,7 +18,7 @@ public class LocationUtils {
     }
 
     public static Location randomSpawnableLocation(Location location, int xzRadius, int maxTries) {
-        Location l = null;
+        Location l;
         int tries = 0;
         do {
             tries++;
@@ -29,7 +29,7 @@ public class LocationUtils {
                     return l;
             }
         }
-        while (!isSpawnable(location) && tries < maxTries);
+        while (!isSpawnable(l) && tries < maxTries); // TODO: Fix spawn in unspawnable location
         return l;
     }
 
