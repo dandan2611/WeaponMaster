@@ -115,7 +115,7 @@ public class InvokerStickWeapon extends Weapon implements InteractionListener, L
                 return;
 
             if(target.equals(mob.getOwner()))
-                event.setCancelled(true); // TODO: Owner not detected
+                event.setCancelled(true);
         }
     }
 
