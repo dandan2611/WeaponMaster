@@ -1,6 +1,7 @@
 package com.dandan2611.weaponmaster.weapon;
 
 import com.dandan2611.weaponmaster.utils.ItemUtils;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 public abstract class Weapon {
@@ -23,6 +24,10 @@ public abstract class Weapon {
 
     public boolean isWeapon(ItemStack item) {
         return ItemUtils.isComparable(getItem(), item);
+    }
+
+    public void give(Player player) {
+        player.getInventory().addItem(getItem());
     }
 
     public InteractionListener getInteractionListener() {
