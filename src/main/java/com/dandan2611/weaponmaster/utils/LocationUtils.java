@@ -12,9 +12,9 @@ public class LocationUtils {
 
     public static Location randomLocation(Location location, int xzRadius) {
         Random random = new Random();
-        int randX = random.nextInt(xzRadius);
-        int randZ = random.nextInt(xzRadius);
-        return new Location(location.getWorld(), randX, 0, randZ);
+        int randX = random.nextInt(2 * xzRadius) - xzRadius;
+        int randZ = random.nextInt(2 * xzRadius) - xzRadius;
+        return new Location(location.getWorld(), location.getX() + randX, 0, location.getZ() + randZ);
     }
 
     public static Location randomSpawnableLocation(Location location, int xzRadius, int maxTries) {
