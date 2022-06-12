@@ -7,6 +7,16 @@ public abstract class Weapon {
 
     protected InteractionListener interactionListener;
 
+    public Weapon(InteractionListener interactionListener) {
+        this.interactionListener = interactionListener;
+    }
+
+    public Weapon() {
+        this(null);
+    }
+
+    public abstract String id();
+
     public abstract String name();
 
     public abstract ItemStack getItem();
@@ -17,6 +27,10 @@ public abstract class Weapon {
 
     public InteractionListener getInteractionListener() {
         return interactionListener;
+    }
+
+    public void setInteractionListener(InteractionListener interactionListener) {
+        this.interactionListener = interactionListener;
     }
 
 }
