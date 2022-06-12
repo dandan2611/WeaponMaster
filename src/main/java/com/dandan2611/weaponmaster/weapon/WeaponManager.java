@@ -1,6 +1,8 @@
 package com.dandan2611.weaponmaster.weapon;
 
 import com.dandan2611.weaponmaster.WeaponMaster;
+import org.bukkit.Bukkit;
+import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 
 import java.lang.reflect.Constructor;
@@ -27,6 +29,9 @@ public class WeaponManager {
                     continue;
                 try {
                     Weapon weapon = (Weapon) constructor.newInstance();
+                    Listener listener = weapon.getEventListener();
+                    if(listener != null)
+                        Bukkit.getPluginManager().registerEvents(listener, WeaponMaster.getInstance());
                     weaponMap.put(weapon.id(), weapon);
                 } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
                     LOGGER.severe("Unable to load weapon " + weaponType.name());

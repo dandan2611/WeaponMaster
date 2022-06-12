@@ -2,11 +2,13 @@ package com.dandan2611.weaponmaster.weapon;
 
 import com.dandan2611.weaponmaster.utils.ItemUtils;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 
 public abstract class Weapon {
 
     protected InteractionListener interactionListener;
+    protected Listener eventListener;
 
     public Weapon(InteractionListener interactionListener) {
         this.interactionListener = interactionListener;
@@ -36,6 +38,14 @@ public abstract class Weapon {
 
     public void setInteractionListener(InteractionListener interactionListener) {
         this.interactionListener = interactionListener;
+    }
+
+    public Listener getEventListener() {
+        return eventListener;
+    }
+
+    public void setEventListener(Listener eventListener) {
+        this.eventListener = eventListener;
     }
 
 }
