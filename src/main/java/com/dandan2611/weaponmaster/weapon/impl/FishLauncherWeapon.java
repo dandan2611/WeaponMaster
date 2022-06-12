@@ -52,7 +52,7 @@ public class FishLauncherWeapon extends Weapon implements InteractionListener {
 
     @Override
     public String name() {
-        return "Lanceur de poisson";
+        return "Fish Launcher";
     }
 
     @Override
