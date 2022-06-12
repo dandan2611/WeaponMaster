@@ -38,7 +38,7 @@ public class WeaponMaster extends JavaPlugin {
         // Event listeners registration
         getServer().getPluginManager().registerEvents(new WeaponInteractionListener(this), this);
 
-        logger.fine("Plugin enabled!");
+        logger.info("Plugin enabled!");
     }
 
     @Override
@@ -47,7 +47,7 @@ public class WeaponMaster extends JavaPlugin {
 
 
 
-        logger.fine("Plugin disabled!");
+        logger.info("Plugin disabled!");
     }
 
     public static WeaponMaster getInstance() {
