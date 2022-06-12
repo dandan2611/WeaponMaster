@@ -8,6 +8,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.util.Vector;
 
 public class DebugStickWeapon extends Weapon implements InteractionListener {
 
@@ -37,6 +38,8 @@ public class DebugStickWeapon extends Weapon implements InteractionListener {
     @Override
     public void onInteract(PlayerInteractEvent event, Weapon weapon) {
         Player player = event.getPlayer();
+        player.getVelocity().add(new Vector(0f, 5f, 0f));
+        player.sendMessage(ChatColor.GREEN + "Pouf!");
     }
 
 }
