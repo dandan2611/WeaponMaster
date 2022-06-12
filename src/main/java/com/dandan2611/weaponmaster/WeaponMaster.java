@@ -1,6 +1,7 @@
 package com.dandan2611.weaponmaster;
 
 import com.dandan2611.weaponmaster.commands.WeaponCommand;
+import com.dandan2611.weaponmaster.listeners.WeaponInteractionListener;
 import com.dandan2611.weaponmaster.weapon.WeaponManager;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -33,6 +34,9 @@ public class WeaponMaster extends JavaPlugin {
         // Managers instantiation
         this.weaponManager = new WeaponManager();
         weaponManager.registerWeapons();
+
+        // Event listeners registration
+        getServer().getPluginManager().registerEvents(new WeaponInteractionListener(this), this);
 
         logger.fine("Plugin enabled!");
     }
