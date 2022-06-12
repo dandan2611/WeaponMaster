@@ -50,4 +50,8 @@ public class WeaponMaster extends JavaPlugin {
         return PLUGIN_INSTANCE;
     }
 
+    public WeaponManager getWeaponManager() {
+        return weaponManager;
+    }
+    
 }
