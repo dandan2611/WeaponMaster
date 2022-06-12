@@ -30,7 +30,7 @@ public class WeaponCommand implements CommandExecutor {
         // TODO: Weapon list
     }
 
-    private void giveWeapon(Player player, String[] args) {
+    private void giveWeapon(Player player, String[] args) { // TODO: Weapon all
         String weaponName = args[0].toUpperCase();
         Weapon weapon = WeaponMaster.getInstance().getWeaponManager().getWeapon(weaponName);
 
