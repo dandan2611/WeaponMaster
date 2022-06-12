@@ -17,7 +17,7 @@ public class DebugStickWeapon extends Weapon implements InteractionListener {
 
     public DebugStickWeapon() {
         super();
-        setInteractionListener(this);
+        super.setInteractionListener(this);
     }
 
     @Override
