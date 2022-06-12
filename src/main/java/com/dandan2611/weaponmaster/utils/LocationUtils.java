@@ -1,5 +1,6 @@
 package com.dandan2611.weaponmaster.utils;
 
+import com.dandan2611.weaponmaster.Constants;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -9,20 +10,24 @@ import java.util.Random;
 
 public class LocationUtils {
 
-    public static Location randomLocation(Location location, int xzRadius, int yRadius) {
+    public static Location randomLocation(Location location, int xzRadius) {
         Random random = new Random();
         int randX = random.nextInt(xzRadius);
         int randZ = random.nextInt(xzRadius);
-        int randY = random.nextInt(yRadius);
-        return new Location(location.getWorld(), randX, randY, randZ);
+        return new Location(location.getWorld(), randX, 0, randZ);
     }
 
-    public static Location randomSpawnableLocation(Location location, int xzRadius, int yRadius, int maxTries) {
+    public static Location randomSpawnableLocation(Location location, int xzRadius, int maxTries) {
         Location l = null;
         int tries = 0;
         do {
             tries++;
-            l = randomLocation(location, xzRadius, yRadius);
+            l = randomLocation(location, xzRadius);
+            for(int i = 0; i < Constants.RANDOM_LOCATION_MAX_Y_TRIES; i++) {
+                l.setY(location.getY() + i);
+                if(isSpawnable(l))
+                    return l;
+            }
         }
         while (!isSpawnable(location) && tries < maxTries);
         return l;
