@@ -23,6 +23,7 @@ public class WeaponCommand implements CommandExecutor, TabCompleter {
                 switch (args.length) {
                     case 0 -> sendHelp(player);
                     case 1 -> giveWeapon(player, args);
+                    default -> err(player, "Correct usage: /weapon <weapon_id>");
                 }
             }
         }
@@ -64,7 +65,7 @@ public class WeaponCommand implements CommandExecutor, TabCompleter {
      * @param args Array of arguments
      */
     private void giveWeapon(Player player, String[] args) {
-        String weaponName = args[0].toUpperCase();
+        String weaponName = args[0];
 
         if(weaponName.equals("ALL") || weaponName.equals("*")) {
             Collection<Weapon> weapons = WeaponMaster.getInstance().getWeaponManager().getWeapons();
