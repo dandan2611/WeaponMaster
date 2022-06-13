@@ -7,14 +7,28 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
+/**
+ * Weapon interaction main listener
+ */
 public class WeaponInteractionListener implements Listener {
 
+    /**
+     * Main class
+     */
     private final WeaponMaster weaponMaster;
 
+    /**
+     * Initialize the listener
+     * @param weaponMaster Main class
+     */
     public WeaponInteractionListener(WeaponMaster weaponMaster) {
         this.weaponMaster = weaponMaster;
     }
 
+    /**
+     * On weapon interaction
+     * @param event Interaction event
+     */
     @EventHandler
     public void onInteraction(PlayerInteractEvent event) {
         ItemStack clickItem = event.getItem();
