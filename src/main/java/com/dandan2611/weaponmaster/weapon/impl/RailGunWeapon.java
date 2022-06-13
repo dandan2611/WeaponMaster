@@ -66,7 +66,7 @@ public class RailGunWeapon extends Weapon implements InteractionListener {
                             Vector playerDirection = playerLocation.getDirection();
                             double distance = playerLocation.distance(targetBlock.getLocation());
 
-                            for(double d = 0d; d < distance; d += 0.1)  {
+                            for(double d = 0d; d < distance; d += 0.5)  {
                                 Location particleLocation =
                                         playerLocation.clone().add(playerDirection.clone().multiply(d));
                                 playerLocation.getWorld().spawnParticle(Particle.CRIT,
