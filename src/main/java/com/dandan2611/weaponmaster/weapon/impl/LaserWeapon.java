@@ -1,6 +1,7 @@
 package com.dandan2611.weaponmaster.weapon.impl;
 
 import com.dandan2611.weaponmaster.Constants;
+import com.dandan2611.weaponmaster.CustomSounds;
 import com.dandan2611.weaponmaster.utils.ItemBuilder;
 import com.dandan2611.weaponmaster.weapon.InteractionListener;
 import com.dandan2611.weaponmaster.weapon.Weapon;
@@ -56,6 +57,9 @@ public class LaserWeapon extends Weapon implements InteractionListener {
                     direction,
                     distance);
             originSender.drawLaser();
+
+            CustomSounds.LASER_FIRE.playSound(location, SoundCategory.PLAYERS, 1f, 1f);
+
             event.setCancelled(true);
         }
     }

@@ -6,7 +6,8 @@ import org.bukkit.World;
 
 public enum CustomSounds {
 
-    FISH_LAUNCHER_FIRE("weaponmaster.fishlauncher.fire");
+    FISH_LAUNCHER_FIRE("weaponmaster.fishlauncher.fire"),
+    LASER_FIRE("weaponmaster.laser.fire");
 
     private final String namespacedName;
 
