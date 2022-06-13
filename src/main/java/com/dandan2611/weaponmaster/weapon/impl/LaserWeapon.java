@@ -50,7 +50,7 @@ public class LaserWeapon extends Weapon implements InteractionListener {
         if(Action.RIGHT_CLICK_AIR.equals(action) || Action.RIGHT_CLICK_BLOCK.equals(action)) {
             Location location = player.getEyeLocation();
             Vector direction = player.getEyeLocation().getDirection();
-            double distance = Constants.MAX_LASER_DISTANCE;
+            double distance = Constants.LASER_MAX_DISTANCE;
 
             LaserSender originSender = new LaserSender(location.clone().subtract(0d, 0.5d, 0d),
                     direction,

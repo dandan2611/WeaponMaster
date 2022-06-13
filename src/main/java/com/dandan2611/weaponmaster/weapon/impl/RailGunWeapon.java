@@ -61,7 +61,7 @@ public class RailGunWeapon extends Weapon implements InteractionListener {
                         @Override
                         public void run() {
                             // Sniping particles
-                            Block targetBlock = player.getTargetBlock(null, Constants.MAX_RAILGUN_DISTANCE);
+                            Block targetBlock = player.getTargetBlock(null, Constants.RAILGUN_MAX_DISTANCE);
                             Location playerLocation = player.getEyeLocation().subtract(0d, 0.5d, 0d);
                             Vector playerDirection = playerLocation.getDirection();
                             double distance = playerLocation.distance(targetBlock.getLocation());
@@ -84,7 +84,7 @@ public class RailGunWeapon extends Weapon implements InteractionListener {
 
                             // More iterations
                             iterations++;
-                            if(iterations >= Constants.MAX_RAILGUN_TASK_ITERATIONS)
+                            if(iterations >= Constants.RAILGUN_MAX_ITERATIONS)
                                 Bukkit.getScheduler().cancelTask(playerTaskMap.get(uuid));
                         }
                     }, 0L, Constants.RAILGUN_TASK_TICKS);

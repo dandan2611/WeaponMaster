@@ -92,7 +92,11 @@ public class InvokerStickWeapon extends Weapon implements InteractionListener, L
                         Constants.INVOKER_STICK_MAX_RANDOM_LOCATION_TRIES);
                 if(randomLocation == null)
                     randomLocation = location;
-                FriendlyMob friendlyMob = new FriendlyMob(Constants.INVOKER_STICK_ENTITY_TYPE, randomLocation, player);
+
+                EntityType[] availableMobs = Constants.INVOKER_STICK_ENTITIES_TYPES;
+                EntityType randomMob = availableMobs[random.nextInt(availableMobs.length)];
+
+                FriendlyMob friendlyMob = new FriendlyMob(randomMob, randomLocation, player);
                 mobs.add(friendlyMob);
 
                 if(world != null) {
