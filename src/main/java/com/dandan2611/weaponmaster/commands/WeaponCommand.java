@@ -67,7 +67,7 @@ public class WeaponCommand implements CommandExecutor, TabCompleter {
     private void giveWeapon(Player player, String[] args) {
         String weaponName = args[0];
 
-        if(weaponName.equals("ALL") || weaponName.equals("*")) {
+        if(weaponName.equalsIgnoreCase("all") || weaponName.equals("*")) {
             Collection<Weapon> weapons = WeaponMaster.getInstance().getWeaponManager().getWeapons();
             weapons.forEach(weapon -> weapon.give(player));
             fine(player, "With great power comes great responsibility...");
