@@ -245,4 +245,14 @@ public class Constants {
      */
     public static final Double POSEIDON_SCEPTER_FLOORS_SEPARATION = 0.25;
 
+    /**
+     * Regeneration effect duration (in seconds)
+     */
+    public static final Integer POSEIDON_SCEPTER_REGEN_DURATION = 15;
+
+    /**
+     * Push velocity
+     */
+    public static final Double POSEIDON_SCEPTER_PUSH_VELOCITY = 5d;
+
 }
