@@ -1,5 +1,6 @@
 package com.dandan2611.weaponmaster;
 
+import org.bukkit.Color;
 import org.bukkit.entity.EntityType;
 
 public class Constants {
@@ -57,6 +58,11 @@ public class Constants {
      * Steps are used to draw particles and detect collisions
      */
     public static final Double LASER_STEPS = 0.1d;
+
+    /**
+     * Laser color
+     */
+    public static final Color LASER_COLOR = Color.fromRGB(52, 148, 172);
 
     /*
 

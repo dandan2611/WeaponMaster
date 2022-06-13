@@ -74,7 +74,8 @@ public class LaserWeapon extends Weapon implements InteractionListener {
 
                 if(!Material.AIR.equals(block.getType())) {
                     // Block detected, reflection needed
-                    Location previousLocation = location.clone().subtract(direction.clone().divide(new Vector(2d, 2d, 2d)));
+                    Location previousLocation = location.clone().subtract(direction.clone().divide(new Vector(10d,
+                            10d, 10d)));
 
                     BlockFace collisionFace = block.getFace(previousLocation.getBlock());
 
@@ -103,7 +104,7 @@ public class LaserWeapon extends Weapon implements InteractionListener {
                     break;
                 }
 
-                Particle.DustOptions dust = new Particle.DustOptions(Color.RED, 1f);
+                Particle.DustOptions dust = new Particle.DustOptions(Constants.LASER_COLOR, 1f);
                 location.getWorld().spawnParticle(Particle.REDSTONE, location, 1, 0d, 0d, 0d, 0d, dust);
             }
         }
