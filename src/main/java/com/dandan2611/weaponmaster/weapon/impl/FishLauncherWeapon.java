@@ -1,6 +1,7 @@
 package com.dandan2611.weaponmaster.weapon.impl;
 
 import com.dandan2611.weaponmaster.Constants;
+import com.dandan2611.weaponmaster.CustomSounds;
 import com.dandan2611.weaponmaster.WeaponMaster;
 import com.dandan2611.weaponmaster.utils.ItemBuilder;
 import com.dandan2611.weaponmaster.weapon.InteractionListener;
@@ -116,6 +117,7 @@ public class FishLauncherWeapon extends Weapon implements InteractionListener {
                 grenadeEntity.setVelocity(velocity);
                 grenadeEntity.setPuffState(STATE_DEFLATED);
                 grenadeEntity.setInvulnerable(true);
+                CustomSounds.FISH_LAUNCHER_FIRE.playSound(startingLocation, SoundCategory.PLAYERS, 1f, 1f);
             }
         }
 
