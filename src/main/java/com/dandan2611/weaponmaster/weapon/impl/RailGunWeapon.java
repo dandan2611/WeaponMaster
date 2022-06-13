@@ -37,7 +37,7 @@ public class RailGunWeapon extends Weapon implements InteractionListener {
 
     @Override
     public String name() {
-        return "Mitraillette";
+        return "Railgun";
     }
 
     @Override
