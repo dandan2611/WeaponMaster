@@ -44,11 +44,25 @@ public class WeaponCommand implements CommandExecutor, TabCompleter {
     }
 
     private void sendHelp(Player player) {
-        // TODO: Weapon list
+        String version = WeaponMaster.getInstance().getDescription().getVersion();
+        player.sendMessage(ChatColor.AQUA + "This server is using WeaponMaster v" + version + " made by dandan2611");
+        player.sendMessage(ChatColor.GRAY.toString() + ChatColor.UNDERLINE +"Available weapons :");
+        Collection<Weapon> weapons = WeaponMaster.getInstance().getWeaponManager().getWeapons();
+        for (Weapon weapon : weapons) {
+            player.sendMessage(ChatColor.GREEN + "⋅ " + weapon.name() + " : " + weapon.id());
+        }
     }
 
     private void giveWeapon(Player player, String[] args) { // TODO: Weapon all
         String weaponName = args[0].toUpperCase();
+
+        if(weaponName.equals("ALL") || weaponName.equals("*")) {
+            Collection<Weapon> weapons = WeaponMaster.getInstance().getWeaponManager().getWeapons();
+            weapons.forEach(weapon -> weapon.give(player));
+            fine(player, "With great power comes great responsibility...");
+            return;
+        }
+
         Weapon weapon = WeaponMaster.getInstance().getWeaponManager().getWeapon(weaponName);
 
         if(weapon == null) {
