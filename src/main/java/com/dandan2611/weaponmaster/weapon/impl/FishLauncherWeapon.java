@@ -22,11 +22,6 @@ public class FishLauncherWeapon extends Weapon implements InteractionListener {
 
     private final ItemStack weaponItem = new ItemBuilder(Material.GOLDEN_SWORD)
             .displayname(ChatColor.GOLD + "Lanceur de poisson " + ChatColor.DARK_GRAY + "(Clic droit)")
-            .lore("§r",
-                    "§7Lancez des poissons... spéciaux...",
-                    "§7Mais un conseil, §bcourez !",
-                    "§r",
-                    "§8Clic droit : Utiliser")
             .build();
 
     private final Integer projectilesTaskId;

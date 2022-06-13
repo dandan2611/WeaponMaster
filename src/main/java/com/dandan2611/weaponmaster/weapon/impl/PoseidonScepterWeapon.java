@@ -24,7 +24,7 @@ import java.util.UUID;
 public class PoseidonScepterWeapon extends Weapon implements InteractionListener, Listener {
 
     private final ItemStack weaponItem = new ItemBuilder(Material.NETHERITE_HOE)
-            .displayname(ChatColor.AQUA.toString() + ChatColor.BOLD + "Sceptre de Poséidon")
+            .displayname(ChatColor.AQUA + "Sceptre de Poséidon " + ChatColor.DARK_GRAY + "(Clic droit)")
             .build();
 
     private final Integer scepterTaskId;
