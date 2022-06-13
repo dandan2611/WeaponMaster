@@ -25,7 +25,7 @@ import java.util.Random;
 
 public class InvokerStickWeapon extends Weapon implements InteractionListener, Listener {
 
-    private final ItemStack weaponItem = new ItemBuilder(Material.WOODEN_HOE)
+    private final ItemStack weaponItem = new ItemBuilder(Material.WOODEN_SWORD)
             .displayname(ChatColor.LIGHT_PURPLE + "Bâton de l'invocateur")
             .build();
 
