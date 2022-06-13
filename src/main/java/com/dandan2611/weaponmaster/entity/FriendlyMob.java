@@ -147,4 +147,11 @@ public class FriendlyMob {
         return owner;
     }
 
+    /**
+     * Get how many times the tickAi method has been called
+     * @return How many times the tickAi method has been called
+     */
+    public int getTicks() {
+        return ticks;
+    }
 }
