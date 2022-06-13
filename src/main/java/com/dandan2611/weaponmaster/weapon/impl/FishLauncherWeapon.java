@@ -19,7 +19,7 @@ import java.util.Collection;
 
 public class FishLauncherWeapon extends Weapon implements InteractionListener {
 
-    private final ItemStack weaponItem = new ItemBuilder(Material.GOLDEN_HOE)
+    private final ItemStack weaponItem = new ItemBuilder(Material.GOLDEN_SWORD)
             .displayname(ChatColor.GOLD + "Lanceur de poisson " + ChatColor.DARK_GRAY + "(Clic droit)")
             .lore("§r",
                     "§7Lancez des poissons... spéciaux...",
@@ -92,6 +92,7 @@ public class FishLauncherWeapon extends Weapon implements InteractionListener {
                     player.getEyeLocation().getDirection().clone().multiply(Constants.FISH_LAUNCHER_BOMB_VELOCITY),
                     player);
             grenades.add(fishGrenade);
+            event.setCancelled(true);
         }
     }
 
