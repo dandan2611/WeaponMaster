@@ -44,6 +44,10 @@ public class WeaponCommand implements CommandExecutor, TabCompleter {
         return suggestions;
     }
 
+    /**
+     * Send help message
+     * @param player Target player
+     */
     private void sendHelp(Player player) {
         String version = WeaponMaster.getInstance().getDescription().getVersion();
         player.sendMessage(ChatColor.AQUA + "This server is using WeaponMaster v" + version + " made by dandan2611");
@@ -54,6 +58,11 @@ public class WeaponCommand implements CommandExecutor, TabCompleter {
         }
     }
 
+    /**
+     * Give weapon to specified player
+     * @param player Player to give weapon to
+     * @param args Array of arguments
+     */
     private void giveWeapon(Player player, String[] args) {
         String weaponName = args[0].toUpperCase();
 
@@ -76,10 +85,20 @@ public class WeaponCommand implements CommandExecutor, TabCompleter {
         player.playSound(player.getLocation(), Sound.ENTITY_ITEM_PICKUP, 1f, 0.5f);
     }
 
+    /**
+     * Send red message to the player
+     * @param player Target player
+     * @param msg Message
+     */
     private void err(Player player, String msg) {
         player.sendMessage(ChatColor.RED + msg);
     }
 
+    /**
+     * Send green message to the player
+     * @param player Target player
+     * @param msg Message
+     */
     private void fine(Player player, String msg) {
         player.sendMessage(ChatColor.GREEN + msg);
     }
