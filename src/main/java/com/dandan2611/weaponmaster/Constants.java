@@ -105,6 +105,16 @@ public class Constants {
      */
     public static final Float FISH_LAUNCHER_EXPLOSION_RADIUS = 16f;
 
+    /**
+     * Fish launcher poison effect radius
+     */
+    public static final Float FISH_LAUNCHER_POISON_RADIUS = 2 * FISH_LAUNCHER_EXPLOSION_RADIUS;
+
+    /**
+     * Fish launcher poison effect duration
+     */
+    public static final Integer FISH_LAUNCHER_POISON_DURATION = 15;
+
     /*
 
 

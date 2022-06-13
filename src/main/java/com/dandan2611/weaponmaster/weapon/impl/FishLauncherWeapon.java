@@ -10,9 +10,12 @@ import org.bukkit.entity.*;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 public class FishLauncherWeapon extends Weapon implements InteractionListener {
 
@@ -99,8 +102,11 @@ public class FishLauncherWeapon extends Weapon implements InteractionListener {
 
         private PufferFish grenadeEntity;
         private Integer countDownTaskId;
+        private final Entity initiator;
 
-        public FishGrenade(Location startingLocation, Vector velocity) {
+        public FishGrenade(Location startingLocation, Vector velocity, Entity initiator) {
+            this.initiator = initiator;
+
             World world = startingLocation.getWorld();
 
             if(world != null) {
@@ -121,21 +127,35 @@ public class FishLauncherWeapon extends Weapon implements InteractionListener {
 
                         @Override
                         public void run() {
-                            if(timeRemaining == firstFillTime) {
+                            if(timeRemaining == firstFillTime) { // Puff 1
                                 grenadeEntity.setPuffState(STATE_HALF);
                                 playPuff(grenadeEntity.getLocation(), 1f);
                             }
-                            else if(timeRemaining == secondFillTime) {
+                            else if(timeRemaining == secondFillTime) { // Puff 2
                                 grenadeEntity.setPuffState(STATE_FULL);
                                 playPuff(grenadeEntity.getLocation(), 1.5f);
                             }
-                            else if(timeRemaining <= 0) {
+                            else if(timeRemaining <= 0) { // Toggle explosion
                                 Location entityLocation = grenadeEntity.getLocation();
                                 World world = entityLocation.getWorld();
                                 playPuff(entityLocation, 2f);
                                 if(world != null) {
-                                    entityLocation.getWorld().createExplosion(entityLocation,
-                                            Constants.FISH_LAUNCHER_EXPLOSION_RADIUS);
+                                    float radius = Constants.FISH_LAUNCHER_EXPLOSION_RADIUS;
+                                    float poisonRadius = Constants.FISH_LAUNCHER_POISON_RADIUS;
+
+                                    world.spawnParticle(Particle.SPELL_MOB_AMBIENT, entityLocation,
+                                            216, radius/3, radius/3, radius/3, 0.085d);
+                                    world.createExplosion(entityLocation,
+                                            Constants.FISH_LAUNCHER_EXPLOSION_RADIUS, false, true, initiator);
+                                    Collection<Entity> entities =
+                                            world.getNearbyEntities(entityLocation, poisonRadius, poisonRadius,
+                                                    poisonRadius);
+                                    for (Entity nearbyEntity : entities) {
+                                        if(nearbyEntity instanceof LivingEntity livingEntity) {
+                                            livingEntity.addPotionEffect(new PotionEffect(PotionEffectType.POISON,
+                                                    Constants.FISH_LAUNCHER_POISON_DURATION*20, 1));
+                                        }
+                                    }
                                 }
                                 destroy();
                             }
@@ -159,6 +179,7 @@ public class FishLauncherWeapon extends Weapon implements InteractionListener {
                                         distance, 0.5d, dustOptions);
                             }
                         }
+
                     }, 0L, Constants.FISH_LAUNCHER_COUNTDOWN_TICKS);
         }
 
