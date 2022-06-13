@@ -39,6 +39,7 @@ public class InvokerStickWeapon extends Weapon implements InteractionListener, L
         super();
         super.setInteractionListener(this);
         super.setEventListener(this);
+        super.setDefaultCooldownTime(Constants.INVOKER_STICK_COOLDOWN);
         this.mobs = new ArrayList<>();
         this.taskId = Bukkit.getScheduler().scheduleSyncRepeatingTask(WeaponMaster.getInstance(),
                 () -> {
@@ -79,33 +80,38 @@ public class InvokerStickWeapon extends Weapon implements InteractionListener, L
         Action action = event.getAction();
 
         if(Action.RIGHT_CLICK_AIR.equals(action) || Action.RIGHT_CLICK_BLOCK.equals(action)) {
-            Location location = player.getLocation();
-            World world = location.getWorld();
+            if(!isInCooldown(player)) {
+                startCooldown(player);
+                Location location = player.getLocation();
+                World world = location.getWorld();
 
-            int maxMobs = Constants.INVOKER_STICK_MAX_MOBS_SPAWN;
-            int minMobs = Constants.INVOKER_STICK_MIN_MOBS_SPAWN;
-            int numberOfMobs = random.nextInt(maxMobs - minMobs) + maxMobs;
+                int maxMobs = Constants.INVOKER_STICK_MAX_MOBS_SPAWN;
+                int minMobs = Constants.INVOKER_STICK_MIN_MOBS_SPAWN;
+                int numberOfMobs = random.nextInt(maxMobs - minMobs) + maxMobs;
 
-            for (int i = 0; i < numberOfMobs; i++) {
-                Location randomLocation = LocationUtils.randomSpawnableLocation(location,
-                        Constants.INVOKER_STICK_MOBS_CLOSE_UP_DISTANCE,
-                        Constants.INVOKER_STICK_MAX_RANDOM_LOCATION_TRIES);
-                if(randomLocation == null)
-                    randomLocation = location;
+                for (int i = 0; i < numberOfMobs; i++) {
+                    Location randomLocation = LocationUtils.randomSpawnableLocation(location,
+                            Constants.INVOKER_STICK_MOBS_CLOSE_UP_DISTANCE,
+                            Constants.INVOKER_STICK_MAX_RANDOM_LOCATION_TRIES);
+                    if(randomLocation == null)
+                        randomLocation = location;
 
-                EntityType[] availableMobs = Constants.INVOKER_STICK_ENTITIES_TYPES;
-                EntityType randomMob = availableMobs[random.nextInt(availableMobs.length)];
+                    EntityType[] availableMobs = Constants.INVOKER_STICK_ENTITIES_TYPES;
+                    EntityType randomMob = availableMobs[random.nextInt(availableMobs.length)];
 
-                FriendlyMob friendlyMob = new FriendlyMob(randomMob, randomLocation, player);
-                mobs.add(friendlyMob);
+                    FriendlyMob friendlyMob = new FriendlyMob(randomMob, randomLocation, player);
+                    mobs.add(friendlyMob);
 
-                if(world != null) {
-                    world.strikeLightningEffect(randomLocation);
-                    world.spawnParticle(Particle.SMOKE_NORMAL, randomLocation, 64, 1d, 1d, 1d, 0d);
-                    world.spawnParticle(Particle.SMOKE_LARGE, randomLocation, 64, 1d, 1d, 1d, 0d);
+                    if(world != null) {
+                        world.strikeLightningEffect(randomLocation);
+                        world.spawnParticle(Particle.SMOKE_NORMAL, randomLocation, 64, 1d, 1d, 1d, 0d);
+                        world.spawnParticle(Particle.SMOKE_LARGE, randomLocation, 64, 1d, 1d, 1d, 0d);
+                    }
                 }
             }
-
+            else {
+                player.sendMessage("§cYou can use this item again in " + getCooldown(player) + " second(s).");
+            }
             event.setCancelled(true);
         }
     }

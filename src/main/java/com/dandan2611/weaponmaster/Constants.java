@@ -134,7 +134,7 @@ public class Constants {
     /**
      * Fish launcher cooldown
      */
-    public static final Long FISH_LAUNCHER_COOLDOWN = 15000L;
+    public static final Long FISH_LAUNCHER_COOLDOWN = 5000L;
 
     /*
 
@@ -177,6 +177,11 @@ public class Constants {
      * Maximum number of mobs to spawn
      */
     public static final Integer INVOKER_STICK_MAX_MOBS_SPAWN = 5;
+
+    /**
+     * Invoker stick cooldown
+     */
+    public static final Long INVOKER_STICK_COOLDOWN = 60000L;
 
     /**
      * Types of entities that can be spawned
