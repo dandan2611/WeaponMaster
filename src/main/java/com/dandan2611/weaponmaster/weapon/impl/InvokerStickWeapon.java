@@ -7,10 +7,7 @@ import com.dandan2611.weaponmaster.utils.ItemBuilder;
 import com.dandan2611.weaponmaster.utils.LocationUtils;
 import com.dandan2611.weaponmaster.weapon.InteractionListener;
 import com.dandan2611.weaponmaster.weapon.Weapon;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
-import org.bukkit.Material;
+import org.bukkit.*;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
@@ -128,9 +125,15 @@ public class InvokerStickWeapon extends Weapon implements InteractionListener, L
             ArrayList<FriendlyMob> entityMobs = getMobs(damager);
             for (FriendlyMob entityMob : entityMobs) {
                 entityMob.setTarget(livingEntity);
+
+                Location location = entityMob.getEntity().getLocation().clone().add(0, 1d, 0);
+                World world = location.getWorld();
+                if(world != null) {
+                    world.playSound(location, Sound.ITEM_TRIDENT_HIT, SoundCategory.HOSTILE, 1f, 0.5f);
+                    world.spawnParticle(Particle.SMOKE_NORMAL, location, 16, 1d, 1d, 1d, 0.05d);
+                }
             }
         }
-        // TODO: Maybe add sounds and effects like anger?
     }
 
     public FriendlyMob getMob(Entity entity) {
