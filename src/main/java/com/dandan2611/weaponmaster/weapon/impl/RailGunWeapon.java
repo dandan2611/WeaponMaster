@@ -18,7 +18,7 @@ import java.util.UUID;
 
 public class RailGunWeapon extends Weapon implements InteractionListener {
 
-    private final ItemStack weaponItem = new ItemBuilder(Material.IRON_HOE)
+    private final ItemStack weaponItem = new ItemBuilder(Material.IRON_SWORD)
             .displayname(ChatColor.BLUE.toString() + ChatColor.BOLD + "Mitraillette")
             .build();
 
