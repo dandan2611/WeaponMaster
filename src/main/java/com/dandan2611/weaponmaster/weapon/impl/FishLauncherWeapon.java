@@ -13,7 +13,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 
 import java.util.ArrayList;
-import java.util.UUID;
 
 public class FishLauncherWeapon extends Weapon implements InteractionListener {
 
