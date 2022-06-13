@@ -79,8 +79,30 @@ public class RailGunWeapon extends Weapon implements InteractionListener {
                             }
 
                             // Block breaking
-                            if(!Material.AIR.equals(targetBlock.getType()))
-                                targetBlock.breakNaturally();
+                            if(!Material.AIR.equals(targetBlock.getType())) {
+                                World world = targetBlock.getWorld();
+                                world.spawnParticle(Particle.BLOCK_CRACK,
+                                        targetBlock.getLocation().add(0.5d, 0.5d, 0.5d),
+                                        64,
+                                        0.25d,
+                                        0.25d,
+                                        0.25d,
+                                        0d,
+                                        targetBlock.getBlockData());
+                                world.playSound(targetBlock.getLocation(),
+                                        Sound.BLOCK_NOTE_BLOCK_HAT,
+                                        SoundCategory.PLAYERS,
+                                        1f,
+                                        1.5f);
+                                world.playSound(player.getLocation(),
+                                        Sound.BLOCK_NOTE_BLOCK_HAT,
+                                        SoundCategory.PLAYERS,
+                                        1f,
+                                        1.5f);
+                                if(!Material.BEDROCK.equals(targetBlock.getType())) {
+                                    targetBlock.breakNaturally();
+                                }
+                            }
 
                             // More iterations
                             iterations++;
