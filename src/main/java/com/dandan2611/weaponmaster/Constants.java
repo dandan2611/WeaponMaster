@@ -77,7 +77,7 @@ public class Constants {
     /**
      * Fish launcher detection & cleanup task period ticks
      */
-    public static final Long FISH_LAUNCHER_TASK_TICKS = 5L;
+    public static final Long FISH_LAUNCHER_TASK_TICKS = 2L;
 
     /**
      * Fish launcher countdown task period ticks
