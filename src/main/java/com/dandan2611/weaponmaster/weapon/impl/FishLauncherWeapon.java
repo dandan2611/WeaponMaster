@@ -146,7 +146,7 @@ public class FishLauncherWeapon extends Weapon implements InteractionListener {
                                 if(world != null) {
                                     float radius = Constants.FISH_LAUNCHER_EXPLOSION_RADIUS;
                                     float poisonRadius = Constants.FISH_LAUNCHER_POISON_RADIUS;
-
+                                    grenadeEntity.remove();
                                     world.spawnParticle(Particle.SPELL_MOB_AMBIENT, entityLocation,
                                             216, radius/3, radius/3, radius/3, 0.085d);
                                     world.createExplosion(entityLocation,

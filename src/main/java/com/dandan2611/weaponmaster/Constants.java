@@ -119,7 +119,7 @@ public class Constants {
      * Fish launcher explosion radius
      * /!\ Too high values can cause server lag spikes /!\
      */
-    public static final Float FISH_LAUNCHER_EXPLOSION_RADIUS = 16f;
+    public static final Float FISH_LAUNCHER_EXPLOSION_RADIUS = 8f;
 
     /**
      * Fish launcher poison effect radius
