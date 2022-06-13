@@ -18,6 +18,7 @@ public class DebugStickWeapon extends Weapon implements InteractionListener {
     public DebugStickWeapon() {
         super();
         super.setInteractionListener(this);
+        super.setDefaultCooldownTime(10000L);
     }
 
     @Override
@@ -38,8 +39,14 @@ public class DebugStickWeapon extends Weapon implements InteractionListener {
     @Override
     public void onInteract(PlayerInteractEvent event, Weapon weapon) {
         Player player = event.getPlayer();
-        player.getVelocity().add(new Vector(0f, 5f, 0f));
-        player.sendMessage(ChatColor.GREEN + "Pouf!");
+        if(!super.isInCooldown(player)) {
+            player.getVelocity().add(new Vector(0f, 5f, 0f));
+            player.sendMessage(ChatColor.GREEN + "Pouf!");
+            super.startCooldown(player);
+        }
+        else {
+            player.sendMessage(ChatColor.RED + "Cooldown in progress: "+ super.getCooldown(player) + " seconds remaining!");
+        }
     }
 
 }

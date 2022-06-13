@@ -22,7 +22,6 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.UUID;
 
 public class InvokerStickWeapon extends Weapon implements InteractionListener, Listener {
 

@@ -9,6 +9,7 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.HashMap;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 public abstract class Weapon {
 
@@ -44,17 +45,19 @@ public abstract class Weapon {
             HandlerList.unregisterAll(eventListener);
     }
 
-    public void cooldown(OfflinePlayer player) {
+    public void startCooldown(OfflinePlayer player) {
         playerCooldownMap.put(player.getUniqueId(), System.currentTimeMillis());
     }
 
     public boolean isInCooldown(OfflinePlayer player) {
-        return isInCooldown(player, defaultCooldownTime);
+        Long cooldownStartTime = playerCooldownMap.get(player.getUniqueId());
+        return cooldownStartTime != null && System.currentTimeMillis() <= cooldownStartTime + defaultCooldownTime;
     }
 
-    public boolean isInCooldown(OfflinePlayer player, Long cooldownTime) {
+    public long getCooldown(OfflinePlayer player) {
         Long cooldownStartTime = playerCooldownMap.get(player.getUniqueId());
-        return cooldownStartTime != null && cooldownStartTime < System.currentTimeMillis() + cooldownTime;
+        long remainingTime = System.currentTimeMillis() - cooldownStartTime;
+        return TimeUnit.MILLISECONDS.toSeconds(defaultCooldownTime) - TimeUnit.MILLISECONDS.toSeconds(remainingTime);
     }
 
     public InteractionListener getInteractionListener() {
@@ -87,6 +90,7 @@ public abstract class Weapon {
 
     public void setDefaultCooldownTime(Long defaultCooldownTime) {
         this.defaultCooldownTime = defaultCooldownTime;
+        this.playerCooldownMap = new HashMap<>();
     }
 
 }
