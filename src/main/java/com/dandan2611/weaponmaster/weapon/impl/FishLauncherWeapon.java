@@ -89,7 +89,8 @@ public class FishLauncherWeapon extends Weapon implements InteractionListener {
 
         if(Action.RIGHT_CLICK_AIR.equals(action) || Action.RIGHT_CLICK_BLOCK.equals(action)) {
             FishGrenade fishGrenade = new FishGrenade(player.getEyeLocation().clone().subtract(0.5d, 0.5d, 0.5d),
-                    player.getEyeLocation().getDirection().clone().multiply(Constants.FISH_LAUNCHER_BOMB_VELOCITY));
+                    player.getEyeLocation().getDirection().clone().multiply(Constants.FISH_LAUNCHER_BOMB_VELOCITY),
+                    player);
             grenades.add(fishGrenade);
         }
     }
