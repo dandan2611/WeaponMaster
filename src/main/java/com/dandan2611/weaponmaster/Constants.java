@@ -28,4 +28,11 @@ public class Constants {
     public static final Integer INVOKER_STICK_MAX_MOBS_SPAWN = 5;
     public static final EntityType INVOKER_STICK_ENTITY_TYPE = EntityType.ZOMBIE;
 
+    public static final Long POSEIDON_SCEPTER_TASK_TICKS = 2L;
+    public static final Double POSEIDON_SCEPTER_CYLINDER_START_RADIUS = 0.5d;
+    public static final Double POSEIDON_SCEPTER_CYLINDER_MAX_RADIUS = 2.5d;
+    public static final Integer POSEIDON_SCEPTER_CYLINDER_STEPS = 64;
+    public static final Integer POSEIDON_SCEPTER_NUM_FLOORS = 5;
+    public static final Double POSEIDON_SCEPTER_FLOORS_SEPARATION = 0.25;
+
 }

@@ -8,7 +8,8 @@ public enum Weapons {
     RAILGUN(RailGunWeapon.class),
     LASER(LaserWeapon.class),
     FISH_LAUNCHER(FishLauncherWeapon.class),
-    INVOKER_STICK(InvokerStickWeapon.class);
+    INVOKER_STICK(InvokerStickWeapon.class),
+    POSEIDON_SCEPTER(PoseidonScepterWeapon.class);
 
     private Class<? extends Weapon> weaponClass;
 
