@@ -44,6 +44,14 @@ public class FishLauncherWeapon extends Weapon implements InteractionListener {
                         }
                         else if(!grenade.isAlive())
                             grenades.remove(grenade);
+                        else {
+                            Location location = grenade.grenadeEntity.getLocation();
+                            World world = location.getWorld();
+                            if(world != null) {
+                                world.spawnParticle(Particle.WATER_SPLASH, location, 4, 0.25d, 0.25d,
+                                        0.25d, 0.01d);
+                            }
+                        }
                     }
                 },
                 0L, Constants.FISH_LAUNCHER_TASK_TICKS);
