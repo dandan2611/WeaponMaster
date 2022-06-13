@@ -97,8 +97,8 @@ public class FishLauncherWeapon extends Weapon implements InteractionListener {
                     new Runnable() {
 
                         private int timeRemaining = 10 * Constants.FISH_LAUNCHER_TIMER;
-                        private int firstFillTime = 10 * Constants.FISH_LAUNCHER_FIRST_FILL;
-                        private int secondFillTime = 10 * Constants.FISH_LAUNCHER_SECOND_FILL;
+                        private final int firstFillTime = 10 * Constants.FISH_LAUNCHER_FIRST_FILL;
+                        private final int secondFillTime = 10 * Constants.FISH_LAUNCHER_SECOND_FILL;
 
                         @Override
                         public void run() {
@@ -110,8 +110,11 @@ public class FishLauncherWeapon extends Weapon implements InteractionListener {
                             }
                             else if(timeRemaining <= 0) {
                                 Location entityLocation = grenadeEntity.getLocation();
-                                entityLocation.getWorld().createExplosion(entityLocation,
-                                        Constants.FISH_LAUNCHER_EXPLOSION_RADIUS);
+                                World world = entityLocation.getWorld();
+                                if(world != null) {
+                                    entityLocation.getWorld().createExplosion(entityLocation,
+                                            Constants.FISH_LAUNCHER_EXPLOSION_RADIUS);
+                                }
                                 destroy();
                             }
                             timeRemaining--;
