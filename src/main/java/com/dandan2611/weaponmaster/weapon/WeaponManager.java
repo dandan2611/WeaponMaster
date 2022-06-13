@@ -64,6 +64,14 @@ public class WeaponManager {
     }
 
     /**
+     * Shutdown the manager
+     * Turning off the manager will shut down every registered weapons
+     */
+    public void shutdown() {
+        weaponMap.values().forEach(Weapon::shutdown);
+    }
+
+    /**
      * Get a weapon from its id
      * @param weaponId Weapon id
      * @return The corresponding weapon or NULL if there is no weapon registered with this id

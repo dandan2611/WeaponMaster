@@ -48,7 +48,7 @@ public class WeaponMaster extends JavaPlugin {
     public void onDisable() {
         logger.info("Disabling plugin...");
 
-
+        weaponManager.shutdown();
 
         logger.info("Plugin disabled!");
     }
