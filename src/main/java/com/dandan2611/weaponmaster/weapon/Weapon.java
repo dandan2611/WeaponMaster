@@ -1,7 +1,9 @@
 package com.dandan2611.weaponmaster.weapon;
 
 import com.dandan2611.weaponmaster.utils.ItemUtils;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 
@@ -30,6 +32,11 @@ public abstract class Weapon {
 
     public void give(Player player) {
         player.getInventory().addItem(getItem());
+    }
+
+    public void shutdown() {
+        if(eventListener != null)
+            HandlerList.unregisterAll(eventListener);
     }
 
     public InteractionListener getInteractionListener() {
