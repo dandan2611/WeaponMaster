@@ -17,7 +17,7 @@ import java.util.UUID;
 
 public class LaserWeapon extends Weapon implements InteractionListener {
 
-    private final ItemStack weaponItem = new ItemBuilder(Material.DIAMOND_HOE)
+    private final ItemStack weaponItem = new ItemBuilder(Material.DIAMOND_SWORD)
             .displayname(ChatColor.WHITE + "Laser")
             .build();
 
