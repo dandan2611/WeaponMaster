@@ -61,9 +61,15 @@ public class FishLauncherWeapon extends Weapon implements InteractionListener {
     }
 
     @Override
+    public void shutdown() {
+        super.shutdown();
+        if(projectilesTaskId != null)
+            Bukkit.getScheduler().cancelTask(projectilesTaskId);
+    }
+
+    @Override
     public void onInteract(PlayerInteractEvent event, Weapon weapon) {
         Player player = event.getPlayer();
-        UUID uuid = player.getUniqueId();
         Action action = event.getAction();
 
         if(Action.RIGHT_CLICK_AIR.equals(action) || Action.RIGHT_CLICK_BLOCK.equals(action)) {
