@@ -13,6 +13,8 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
 import java.util.HashMap;
@@ -112,6 +114,9 @@ public class PoseidonScepterWeapon extends Weapon implements InteractionListener
                 if(world != null) {
                     world.playSound(location, Sound.BLOCK_CONDUIT_ACTIVATE, SoundCategory.PLAYERS, 1f, 1f);
                 }
+                player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION,
+                        Constants.POSEIDON_SCEPTER_REGEN_DURATION*20, 1, false, false,
+                        false));
             }
 
             event.setCancelled(true);
@@ -121,18 +126,49 @@ public class PoseidonScepterWeapon extends Weapon implements InteractionListener
     @EventHandler
     public void onMove(PlayerMoveEvent event) {
         Player player = event.getPlayer();
+        Location playerLocation = player.getLocation();
         UUID uuid = player.getUniqueId();
         WeaponContext context = activatedPlayers.get(uuid);
         if(context != null) {
             Location centerLocation = context.location;
-            if (centerLocation.distance(player.getLocation()) > Constants.POSEIDON_SCEPTER_CYLINDER_MAX_RADIUS) {
+            double x = playerLocation.getX() - centerLocation.getX();
+            double z = playerLocation.getZ() - centerLocation.getZ();
+            double distance = Math.sqrt(x*x+z*z);
+            if (distance > Constants.POSEIDON_SCEPTER_CYLINDER_MAX_RADIUS) {
                 Vector direction = player.getEyeLocation().getDirection();
-                Location playerLocation = player.getLocation();
-                Vector playerToCenterVector = new Vector(playerLocation.getX() - centerLocation.getX(),
+                Vector playerToCenterVector = new Vector(x,
                         playerLocation.getY() - centerLocation.getY(),
-                        playerLocation.getZ() - centerLocation.getZ());
+                        z);
                 playerToCenterVector.normalize();
                 player.teleport(event.getFrom().clone().setDirection(direction).subtract(playerToCenterVector.multiply(0.25d)));
+            }
+        }
+        else {
+            World playerWorld = playerLocation.getWorld();
+            if(playerWorld == null)
+                return;
+            for (WeaponContext value : activatedPlayers.values()) {
+                Location centerLocation = value.location;
+                if(playerWorld.equals(centerLocation.getWorld())) {
+                    double x = playerLocation.getX() - centerLocation.getX();
+                    double z = playerLocation.getZ() - centerLocation.getZ();
+                    double distance = Math.sqrt(x*x+z*z);
+                    if (distance <= Constants.POSEIDON_SCEPTER_CYLINDER_MAX_RADIUS) {
+                        Vector direction = player.getEyeLocation().getDirection();
+                        Vector playerToCenterVector = new Vector(x,
+                                playerLocation.getY() - centerLocation.getY(),
+                                z);
+                        playerToCenterVector.normalize();
+                        playerToCenterVector.multiply(-1);
+                        player.teleport(event.getFrom().clone().setDirection(direction).subtract(playerToCenterVector.multiply(0.25d)));
+                        player.setVelocity(playerToCenterVector.multiply(-Constants.POSEIDON_SCEPTER_PUSH_VELOCITY));
+                        playerWorld.playSound(playerLocation,
+                                Sound.BLOCK_CONDUIT_ATTACK_TARGET,
+                                SoundCategory.PLAYERS,
+                                1f,
+                                2f);
+                    }
+                }
             }
         }
     }
