@@ -19,6 +19,7 @@ public class Constants {
     public static final Integer FISH_LAUNCHER_TIMER = 6;
     public static final Integer FISH_LAUNCHER_FIRST_FILL = 4;
     public static final Integer FISH_LAUNCHER_SECOND_FILL = 2;
+    public static final Float FISH_LAUNCHER_EXPLOSION_RADIUS = 16f;
 
     public static final Long INVOKER_STICK_TASK_TICKS = 5L;
     public static final Double INVOKER_STICK_MAX_TARGET_DISTANCE = 24d;

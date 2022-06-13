@@ -110,7 +110,8 @@ public class FishLauncherWeapon extends Weapon implements InteractionListener {
                             }
                             else if(timeRemaining <= 0) {
                                 Location entityLocation = grenadeEntity.getLocation();
-                                entityLocation.getWorld().createExplosion(entityLocation, 16f);
+                                entityLocation.getWorld().createExplosion(entityLocation,
+                                        Constants.FISH_LAUNCHER_EXPLOSION_RADIUS);
                                 destroy();
                             }
                             timeRemaining--;
