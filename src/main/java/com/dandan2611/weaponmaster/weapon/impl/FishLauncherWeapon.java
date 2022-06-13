@@ -72,7 +72,8 @@ public class FishLauncherWeapon extends Weapon implements InteractionListener {
         Action action = event.getAction();
 
         if(Action.RIGHT_CLICK_AIR.equals(action) || Action.RIGHT_CLICK_BLOCK.equals(action)) {
-            FishGrenade fishGrenade = new FishGrenade(player.getEyeLocation().clone().subtract(0.5d, 0.5d, 0.5d), player.getEyeLocation().getDirection().clone().multiply(Constants.FISH_LAUNCHER_BOMB_VELOCITY));
+            FishGrenade fishGrenade = new FishGrenade(player.getEyeLocation().clone().subtract(0.5d, 0.5d, 0.5d),
+                    player.getEyeLocation().getDirection().clone().multiply(Constants.FISH_LAUNCHER_BOMB_VELOCITY));
             grenades.add(fishGrenade);
         }
     }
@@ -109,13 +110,16 @@ public class FishLauncherWeapon extends Weapon implements InteractionListener {
                         public void run() {
                             if(timeRemaining == firstFillTime) {
                                 grenadeEntity.setPuffState(STATE_HALF);
+                                playPuffSound(grenadeEntity.getLocation(), 1f);
                             }
                             else if(timeRemaining == secondFillTime) {
                                 grenadeEntity.setPuffState(STATE_FULL);
+                                playPuffSound(grenadeEntity.getLocation(), 1.5f);
                             }
                             else if(timeRemaining <= 0) {
                                 Location entityLocation = grenadeEntity.getLocation();
                                 World world = entityLocation.getWorld();
+                                playPuffSound(entityLocation, 2f);
                                 if(world != null) {
                                     entityLocation.getWorld().createExplosion(entityLocation,
                                             Constants.FISH_LAUNCHER_EXPLOSION_RADIUS);
@@ -123,6 +127,13 @@ public class FishLauncherWeapon extends Weapon implements InteractionListener {
                                 destroy();
                             }
                             timeRemaining--;
+                        }
+
+                        private void playPuffSound(Location location, float pitch) {
+                            World world = location.getWorld();
+                            if(world != null)
+                                world.playSound(location, Sound.ENTITY_CREEPER_HURT, SoundCategory.PLAYERS, 1f,
+                                        pitch);
                         }
                     }, 0L, Constants.FISH_LAUNCHER_COUNTDOWN_TICKS);
         }
