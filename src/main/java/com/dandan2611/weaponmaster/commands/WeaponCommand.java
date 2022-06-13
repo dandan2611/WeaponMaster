@@ -3,6 +3,7 @@ package com.dandan2611.weaponmaster.commands;
 import com.dandan2611.weaponmaster.WeaponMaster;
 import com.dandan2611.weaponmaster.weapon.Weapon;
 import org.bukkit.ChatColor;
+import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -60,6 +61,7 @@ public class WeaponCommand implements CommandExecutor, TabCompleter {
             Collection<Weapon> weapons = WeaponMaster.getInstance().getWeaponManager().getWeapons();
             weapons.forEach(weapon -> weapon.give(player));
             fine(player, "With great power comes great responsibility...");
+            player.playSound(player.getLocation(), Sound.ENTITY_ITEM_PICKUP, 1f, 0.5f);
             return;
         }
 
@@ -71,7 +73,7 @@ public class WeaponCommand implements CommandExecutor, TabCompleter {
         }
         weapon.give(player);
         fine(player, "You now have to power of the " + weapon.name() + " weapon!");
-        // TODO: Give sound
+        player.playSound(player.getLocation(), Sound.ENTITY_ITEM_PICKUP, 1f, 0.5f);
     }
 
     private void err(Player player, String msg) {
