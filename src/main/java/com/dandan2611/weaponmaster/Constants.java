@@ -64,6 +64,16 @@ public class Constants {
      */
     public static final Color LASER_COLOR = Color.fromRGB(52, 148, 172);
 
+    /**
+     * Laser raytrace raysize
+     */
+    public static final Float LASER_RAYSIZE = 0.25f;
+
+    /**
+     * Laser fire ticks
+     */
+    public static final Integer LASER_FIRE_TICKS = 40;
+
     /*
 
     ███████╗██╗░██████╗██╗░░██╗        ██╗░░░░░░█████╗░██╗░░░██╗███╗░░██╗░█████╗░██╗░░██╗███████╗██████╗░

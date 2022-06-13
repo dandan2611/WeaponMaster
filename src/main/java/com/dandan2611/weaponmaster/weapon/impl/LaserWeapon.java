@@ -8,12 +8,17 @@ import com.dandan2611.weaponmaster.weapon.Weapon;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class LaserWeapon extends Weapon implements InteractionListener {
@@ -68,6 +73,9 @@ public class LaserWeapon extends Weapon implements InteractionListener {
 
         public void drawLaser() {
             source.setDirection(direction);
+            World world = source.getWorld();
+            if(world == null)
+                throw new NullPointerException("World is null");
             for(double d = Constants.LASER_STEPS; d < distance; d += Constants.LASER_STEPS) {
                 Location location = source.clone().add(direction.clone().multiply(d));
                 Block block = location.getBlock();
@@ -105,7 +113,18 @@ public class LaserWeapon extends Weapon implements InteractionListener {
                 }
 
                 Particle.DustOptions dust = new Particle.DustOptions(Constants.LASER_COLOR, 1f);
-                location.getWorld().spawnParticle(Particle.REDSTONE, location, 1, 0d, 0d, 0d, 0d, dust);
+                world.spawnParticle(Particle.REDSTONE, location, 1, 0d, 0d, 0d, 0d, dust);
+            }
+            RayTraceResult rayTraceResult = world.rayTraceEntities(
+                    source.clone().add(direction),
+                    direction,
+                    distance,
+                    Constants.LASER_RAYSIZE);
+            if(rayTraceResult != null) {
+                Entity hitEntity = rayTraceResult.getHitEntity();
+                if(hitEntity != null) {
+                    hitEntity.setFireTicks(Constants.LASER_FIRE_TICKS);
+                }
             }
         }
 
