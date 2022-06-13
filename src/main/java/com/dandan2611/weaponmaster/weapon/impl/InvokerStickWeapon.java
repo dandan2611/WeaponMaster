@@ -82,6 +82,7 @@ public class InvokerStickWeapon extends Weapon implements InteractionListener, L
 
         if(Action.RIGHT_CLICK_AIR.equals(action) || Action.RIGHT_CLICK_BLOCK.equals(action)) {
             Location location = player.getLocation();
+            World world = location.getWorld();
 
             int maxMobs = Constants.INVOKER_STICK_MAX_MOBS_SPAWN;
             int minMobs = Constants.INVOKER_STICK_MIN_MOBS_SPAWN;
@@ -95,6 +96,12 @@ public class InvokerStickWeapon extends Weapon implements InteractionListener, L
                     randomLocation = location;
                 FriendlyMob friendlyMob = new FriendlyMob(Constants.INVOKER_STICK_ENTITY_TYPE, randomLocation, player);
                 mobs.add(friendlyMob);
+
+                if(world != null) {
+                    world.strikeLightningEffect(randomLocation);
+                    world.spawnParticle(Particle.SMOKE_NORMAL, randomLocation, 64, 1d, 1d, 1d, 0d);
+                    world.spawnParticle(Particle.SMOKE_LARGE, randomLocation, 64, 1d, 1d, 1d, 0d);
+                }
             }
 
             event.setCancelled(true);
