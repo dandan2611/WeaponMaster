@@ -77,7 +77,6 @@ public class InvokerStickWeapon extends Weapon implements InteractionListener, L
     @Override
     public void onInteract(PlayerInteractEvent event, Weapon weapon) {
         Player player = event.getPlayer();
-        UUID uuid = player.getUniqueId();
         Action action = event.getAction();
 
         if(Action.RIGHT_CLICK_AIR.equals(action) || Action.RIGHT_CLICK_BLOCK.equals(action)) {
@@ -86,7 +85,7 @@ public class InvokerStickWeapon extends Weapon implements InteractionListener, L
 
             int maxMobs = Constants.INVOKER_STICK_MAX_MOBS_SPAWN;
             int minMobs = Constants.INVOKER_STICK_MIN_MOBS_SPAWN;
-            int numberOfMobs = random.nextInt(maxMobs - minMobs) + maxMobs; // TODO : Delete zombies on disable
+            int numberOfMobs = random.nextInt(maxMobs - minMobs) + maxMobs;
 
             for (int i = 0; i < numberOfMobs; i++) {
                 Location randomLocation = LocationUtils.randomSpawnableLocation(location,
@@ -105,6 +104,16 @@ public class InvokerStickWeapon extends Weapon implements InteractionListener, L
             }
 
             event.setCancelled(true);
+        }
+    }
+
+    @Override
+    public void shutdown() {
+        super.shutdown();
+        if(taskId != null)
+            Bukkit.getScheduler().cancelTask(taskId);
+        for (FriendlyMob mob : mobs) {
+            mob.destroy();
         }
     }
 
