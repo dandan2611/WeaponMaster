@@ -41,12 +41,17 @@ public class InvokerStickWeapon extends Weapon implements InteractionListener, L
         super.setEventListener(this);
         super.setDefaultCooldownTime(Constants.INVOKER_STICK_COOLDOWN);
         this.mobs = new ArrayList<>();
+        final long depopTime = Constants.INVOKER_STICK_DESPAWN_SECONDS*20/Constants.INVOKER_STICK_TASK_TICKS;
         this.taskId = Bukkit.getScheduler().scheduleSyncRepeatingTask(WeaponMaster.getInstance(),
                 () -> {
                     for (int i = 0; i < mobs.size(); i++) {
                         FriendlyMob friendlyMob = mobs.get(i);
 
                         if(friendlyMob.isAlive()) {
+                            if(friendlyMob.getTicks() >= depopTime) {
+                                friendlyMob.depop();
+                                continue;
+                            }
                             friendlyMob.tickAi();
                         }
                         else {

@@ -190,6 +190,11 @@ public class Constants {
     public static final EntityType[] INVOKER_STICK_ENTITIES_TYPES =
             new EntityType[] {EntityType.ZOMBIE, EntityType.SKELETON, EntityType.ENDERMAN};
 
+    /**
+     * Time until the friendly monsters disappear
+     */
+    public static final Integer INVOKER_STICK_DESPAWN_SECONDS = 30;
+
     /*
 
 

@@ -131,6 +131,14 @@ public class FriendlyMob {
         entity.setTarget(target);
     }
 
+    public void depop() {
+        if(isAlive()) {
+            entity.setHealth(0d);
+            if(travelEntity != null)
+                travelEntity.remove();
+        }
+    }
+
     /**
      * Retrieve the mob entity
      * @return The mob entity
