@@ -6,9 +6,14 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 
-public class WeaponCommand implements CommandExecutor {
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+public class WeaponCommand implements CommandExecutor, TabCompleter {
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
@@ -24,6 +29,18 @@ public class WeaponCommand implements CommandExecutor {
             sender.sendMessage("This command can only be executed by a player!"); // TODO: Maybe give command by console?
         }
         return true;
+    }
+
+    @Override
+    public List<String> onTabComplete(CommandSender sender, Command cmd, String label, String[] args) {
+        ArrayList<String> suggestions = new ArrayList<>();
+        if(args.length == 1) {
+            Collection<Weapon> weapons = WeaponMaster.getInstance().getWeaponManager().getWeapons();
+            for (Weapon weapon : weapons) {
+                suggestions.add(weapon.id());
+            }
+        }
+        return suggestions;
     }
 
     private void sendHelp(Player player) {
@@ -50,5 +67,4 @@ public class WeaponCommand implements CommandExecutor {
     private void fine(Player player, String msg) {
         player.sendMessage(ChatColor.GREEN + msg);
     }
-
 }

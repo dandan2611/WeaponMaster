@@ -28,8 +28,11 @@ public class WeaponMaster extends JavaPlugin {
 
         // Weapon command executor
         PluginCommand weaponCommand = getCommand("weapon");
-        if(weaponCommand != null)
-            weaponCommand.setExecutor(new WeaponCommand());
+        if(weaponCommand != null) {
+            WeaponCommand weaponCommandImpl = new WeaponCommand();
+            weaponCommand.setExecutor(weaponCommandImpl);
+            weaponCommand.setTabCompleter(weaponCommandImpl);
+        }
 
         // Managers instantiation
         this.weaponManager = new WeaponManager();
