@@ -15,6 +15,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.entity.EntityCombustEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -164,6 +165,13 @@ public class InvokerStickWeapon extends Weapon implements InteractionListener, L
                 }
             }
         }
+    }
+
+    @EventHandler
+    public void onMobFire(EntityCombustEvent event) {
+        Entity entity = event.getEntity();
+        if(getMob(entity) != null)
+            event.setCancelled(true);
     }
 
     public FriendlyMob getMob(Entity entity) {
