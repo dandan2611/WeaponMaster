@@ -53,7 +53,7 @@ public class WeaponCommand implements CommandExecutor, TabCompleter {
         }
     }
 
-    private void giveWeapon(Player player, String[] args) { // TODO: Weapon all
+    private void giveWeapon(Player player, String[] args) {
         String weaponName = args[0].toUpperCase();
 
         if(weaponName.equals("ALL") || weaponName.equals("*")) {
