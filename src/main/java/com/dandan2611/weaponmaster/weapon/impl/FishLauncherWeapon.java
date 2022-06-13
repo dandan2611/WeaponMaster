@@ -36,6 +36,7 @@ public class FishLauncherWeapon extends Weapon implements InteractionListener {
     public FishLauncherWeapon() {
         super();
         super.setInteractionListener(this);
+        super.setDefaultCooldownTime(Constants.FISH_LAUNCHER_COOLDOWN);
         this.grenades = new ArrayList<>();
         projectilesTaskId = Bukkit.getScheduler().scheduleSyncRepeatingTask(WeaponMaster.getInstance(),
                 () -> {
@@ -89,10 +90,16 @@ public class FishLauncherWeapon extends Weapon implements InteractionListener {
         Action action = event.getAction();
 
         if(Action.RIGHT_CLICK_AIR.equals(action) || Action.RIGHT_CLICK_BLOCK.equals(action)) {
-            FishGrenade fishGrenade = new FishGrenade(player.getEyeLocation().clone().subtract(0.5d, 0.5d, 0.5d),
-                    player.getEyeLocation().getDirection().clone().multiply(Constants.FISH_LAUNCHER_BOMB_VELOCITY),
-                    player);
-            grenades.add(fishGrenade);
+            if(!isInCooldown(player)) {
+                startCooldown(player);
+                FishGrenade fishGrenade = new FishGrenade(player.getEyeLocation().clone().subtract(0.5d, 0.5d, 0.5d),
+                        player.getEyeLocation().getDirection().clone().multiply(Constants.FISH_LAUNCHER_BOMB_VELOCITY),
+                        player);
+                grenades.add(fishGrenade);
+            }
+            else {
+                player.sendMessage("§cYou can use this item again in " + getCooldown(player) + " second(s).");
+            }
             event.setCancelled(true);
         }
     }

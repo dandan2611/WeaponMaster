@@ -131,6 +131,11 @@ public class Constants {
      */
     public static final Integer FISH_LAUNCHER_POISON_DURATION = 15;
 
+    /**
+     * Fish launcher cooldown
+     */
+    public static final Long FISH_LAUNCHER_COOLDOWN = 15000L;
+
     /*
 
 

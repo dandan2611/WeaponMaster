@@ -7,7 +7,7 @@ import com.dandan2611.weaponmaster.weapon.impl.*;
  * Please note that you can also register weapons at runtime!
  */
 public enum Weapons {
-    
+
     RAILGUN(RailGunWeapon.class),
     LASER(LaserWeapon.class),
     FISH_LAUNCHER(FishLauncherWeapon.class),
