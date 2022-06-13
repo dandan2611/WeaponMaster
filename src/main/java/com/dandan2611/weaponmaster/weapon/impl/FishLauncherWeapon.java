@@ -35,7 +35,7 @@ public class FishLauncherWeapon extends Weapon implements InteractionListener {
                         FishGrenade grenade = grenades.get(i);
                         if(grenade.isAlive()
                                 && !grenade.isCountdownStarted()
-                                && grenade.grenadeEntity.isOnGround()) { // TODO: Detect if is in water
+                                && (grenade.grenadeEntity.isOnGround() || grenade.grenadeEntity.isInWater())) {
                             grenade.startCountdown();
                         }
                         else if(!grenade.isAlive())
