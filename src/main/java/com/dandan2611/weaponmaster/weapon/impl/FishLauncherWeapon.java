@@ -110,16 +110,16 @@ public class FishLauncherWeapon extends Weapon implements InteractionListener {
                         public void run() {
                             if(timeRemaining == firstFillTime) {
                                 grenadeEntity.setPuffState(STATE_HALF);
-                                playPuffSound(grenadeEntity.getLocation(), 1f);
+                                playPuff(grenadeEntity.getLocation(), 1f);
                             }
                             else if(timeRemaining == secondFillTime) {
                                 grenadeEntity.setPuffState(STATE_FULL);
-                                playPuffSound(grenadeEntity.getLocation(), 1.5f);
+                                playPuff(grenadeEntity.getLocation(), 1.5f);
                             }
                             else if(timeRemaining <= 0) {
                                 Location entityLocation = grenadeEntity.getLocation();
                                 World world = entityLocation.getWorld();
-                                playPuffSound(entityLocation, 2f);
+                                playPuff(entityLocation, 2f);
                                 if(world != null) {
                                     entityLocation.getWorld().createExplosion(entityLocation,
                                             Constants.FISH_LAUNCHER_EXPLOSION_RADIUS);
@@ -129,11 +129,22 @@ public class FishLauncherWeapon extends Weapon implements InteractionListener {
                             timeRemaining--;
                         }
 
-                        private void playPuffSound(Location location, float pitch) {
+                        private void playPuff(Location location, float pitch) {
                             World world = location.getWorld();
-                            if(world != null)
+                            if(world != null) {
                                 world.playSound(location, Sound.ENTITY_CREEPER_HURT, SoundCategory.PLAYERS, 1f,
                                         pitch);
+                                Particle.DustOptions dustOptions = null;
+                                if(pitch == 1f)
+                                    dustOptions = new Particle.DustOptions(Color.GREEN, 1f);
+                                else if(pitch == 1.5f)
+                                    dustOptions = new Particle.DustOptions(Color.ORANGE, 1f);
+                                else if(pitch == 2f)
+                                    dustOptions = new Particle.DustOptions(Color.RED, 1f);
+                                double distance = 0.25d * pitch;
+                                world.spawnParticle(Particle.REDSTONE, location, 16, distance, distance,
+                                        distance, 0.5d, dustOptions);
+                            }
                         }
                     }, 0L, Constants.FISH_LAUNCHER_COUNTDOWN_TICKS);
         }
