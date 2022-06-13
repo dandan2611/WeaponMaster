@@ -188,7 +188,7 @@ public class Constants {
      * Entities must be childrens of {@link org.bukkit.entity.Mob} to correctly have a target
      */
     public static final EntityType[] INVOKER_STICK_ENTITIES_TYPES =
-            new EntityType[] {EntityType.ZOMBIE, EntityType.SKELETON, EntityType.ENDERMAN};
+            new EntityType[] {EntityType.ZOMBIE, EntityType.SKELETON};
 
     /**
      * Time until the friendly monsters disappear
