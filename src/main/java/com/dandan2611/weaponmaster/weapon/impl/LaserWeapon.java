@@ -74,7 +74,7 @@ public class LaserWeapon extends Weapon implements InteractionListener {
 
                 if(!Material.AIR.equals(block.getType())) {
                     // Block detected, reflection needed
-                    Location previousLocation = location.clone().subtract(direction);
+                    Location previousLocation = location.clone().subtract(direction.clone().divide(new Vector(2d, 2d, 2d)));
 
                     BlockFace collisionFace = block.getFace(previousLocation.getBlock());
 
