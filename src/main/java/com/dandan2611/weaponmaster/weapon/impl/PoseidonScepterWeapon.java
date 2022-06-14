@@ -33,7 +33,7 @@ public class PoseidonScepterWeapon extends Weapon implements InteractionListener
 
     public PoseidonScepterWeapon() {
         super();
-        super.setInteractionListener(this); // TODO: Interaction listener if null
+        super.setInteractionListener(this);
         super.setEventListener(this);
         this.activatedPlayers = new HashMap<>();
         this.scepterTaskId = Bukkit.getScheduler().scheduleSyncRepeatingTask(WeaponMaster.getInstance(),
@@ -58,7 +58,7 @@ public class PoseidonScepterWeapon extends Weapon implements InteractionListener
                     context.radius = radius;
 
                     for (int i = 0; i < floors; i++) {
-                        for (double theta = 0; theta < 360; theta += 360d/steps) { // TODO: Constant
+                        for (double theta = 0; theta < 360; theta += 360d/steps) {
                             double rad = Math.toRadians(theta);
                             double x = Math.cos(rad) * radius;
                             double z = Math.sin(rad) * radius;

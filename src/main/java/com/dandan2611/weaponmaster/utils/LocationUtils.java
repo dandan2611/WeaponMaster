@@ -45,7 +45,7 @@ public class LocationUtils {
                     return l;
             }
         }
-        while (!isSpawnable(l) && tries < maxTries); // TODO: Fix spawn in unspawnable location
+        while (!isSpawnable(l) && tries < maxTries);
         return l;
     }
 

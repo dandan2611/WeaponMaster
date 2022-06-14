@@ -28,7 +28,7 @@ public class WeaponCommand implements CommandExecutor, TabCompleter {
             }
         }
         else {
-            sender.sendMessage("This command can only be executed by a player!"); // TODO: Maybe give command by console?
+            sender.sendMessage("This command can only be executed by a player!");
         }
         return true;
     }
