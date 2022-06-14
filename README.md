@@ -8,7 +8,7 @@
 
 */weapon* : Consult the list of available weapons
 
-*/weapon <all/*/id>* : Get a specific weapon
+*/weapon <all/id>* : Get a specific weapon
 
 ## Build it yourself
 
